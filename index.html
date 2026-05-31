@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exam Result Portal (Demo)</title>
+<style>
+body{font-family:Arial,sans-serif;background:#eef2f7;margin:0}
+.header{background:#0b4f9c;color:white;text-align:center;padding:18px}
+.notice{background:#fff3cd;padding:10px;text-align:center;font-size:14px}
+.card{max-width:850px;margin:25px auto;background:white;padding:25px;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.15)}
+input{width:100%;padding:12px;margin:8px 0 16px;box-sizing:border-box}
+button{padding:12px 18px;border:none;border-radius:4px;cursor:pointer}
+.primary{background:#0b4f9c;color:white}
+.secondary{background:#6c757d;color:white}
+.actions{display:flex;gap:10px}
+table{width:100%;border-collapse:collapse}
+td,th{padding:12px;border:1px solid #ddd}
+tr:nth-child(even){background:#f7f7f7}
+h1,h2{text-align:center}
+#resultPage,#loading{display:none}
+.footer{text-align:center;padding:15px;color:#666}
+.captcha{font-weight:bold;letter-spacing:3px;background:#eee;padding:8px;display:inline-block}
+</style>
+</head>
+<body>
+
+<div class="header">
+<h2>National Testing Agency (NTA)</h2>
+<h3>JEE (Advanced) Result Portal</h3>
+</div>
+
+<div class="notice">
+Demo project page for personal testing.
+</div>
+
+<div class="card" id="loginPage">
+<h2>Candidate Login</h2>
+
+<label>Application Number</label>
+<input id="appNo" type="text">
+
+<label>Date of Birth</label>
+<input type="date">
+
+<label>Password</label>
+<input type="password">
+
+<label>Captcha</label><br>
+<div class="captcha" id="captchaText">A7K9P</div>
+<input type="text">
+
+<div class="actions">
+<button class="primary" onclick="submitForm()">Submit</button>
+<button class="secondary" onclick="location.reload()">Reset</button>
+</div>
+</div>
+
+<div class="card" id="loading">
+<h2>Processing Result...</h2>
+<p style="text-align:center">Please wait.</p>
+</div>
+
+<div class="card" id="resultPage">
+<h1>Scores</h1>
+
+<table>
+<tr><td>Application Number</td><td id="rollNo"></td></tr>
+<tr><td>Candidate Name</td><td>Ayush Kumar Mahato</td></tr>
+<tr><td>Category</td><td>SC</td></tr>
+<tr><td>Gender</td><td>Male</td></tr>
+</table>
+
+<br>
+
+<table>
+<tr><th>Subject</th><th>Paper 1</th><th>Paper 2</th><th>Total</th></tr>
+<tr><td>Chemistry</td><td>50</td><td>64</td><td>114</td></tr>
+<tr><td>Physics</td><td>62</td><td>40</td><td>102</td></tr>
+<tr><td>Mathematics</td><td>23</td><td>43</td><td>66</td></tr>
+<tr><td><b>Grand Total</b></td><td colspan="3"><b>282</b></td></tr>
+</table>
+
+<h1>Rank</h1>
+
+<table>
+<tr><td>CRL Rank</td><td>1456</td></tr>
+<tr><td>SC Rank</td><td>987</td></tr>
+</table>
+
+<br>
+<div class="actions">
+<button class="primary" onclick="window.print()">Print Scorecard</button>
+</div>
+</div>
+
+<div class="footer">
+Generated for demo/testing purposes.
+</div>
+
+<script>
+function submitForm(){
+ let n=document.getElementById('appNo').value;
+ if(!/^\d{10}$/.test(n)){
+   alert('Enter a valid 10 digit application number');
+   return;
+ }
+ document.getElementById('loginPage').style.display='none';
+ document.getElementById('loading').style.display='block';
+
+ setTimeout(function(){
+   document.getElementById('loading').style.display='none';
+   document.getElementById('resultPage').style.display='block';
+   document.getElementById('rollNo').innerText=n;
+ },2000);
+}
+</script>
+
+</body>
+</html>
